@@ -1,11 +1,10 @@
-# app.py
 import streamlit as st
 import time
 import sys
 import os
 import random
 from pipeline import run_research_pipeline
-from ui.components import render_sidebar, render_welcome, render_chat_interface
+from ui.components import render_sidebar
 from ui.styles import inject_custom_css
 
 # Add current directory to path
@@ -13,8 +12,8 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Page configuration
 st.set_page_config(
-    page_title="Research Assistant",
-    page_icon="🔬",
+    page_title="ScholarAI - Research Assistant",
+    page_icon="🎓",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -30,11 +29,11 @@ def init_session_state():
         "is_generating": False,
         "research_state": None,
         "chat_history": [],
-        "user_name": "Bhisham",
+        "user_name": "Researcher",
         "max_chars": 1000,
         "prompt_suggestions": [
             {
-                "title": "Modern AI Architectures",
+                "title": "AI Research",
                 "prompt": "Explain the latest developments in transformer-based AI architectures"
             },
             {
@@ -100,11 +99,6 @@ def handle_prompt_submission(prompt):
         print(f"\n{'='*50}")
         print("PIPELINE RESULT KEYS:", result.keys())
         print(f"{'='*50}")
-        for key, value in result.items():
-            if key == 'search_results':
-                print(f"{key}: {str(value)[:200]}...")
-            else:
-                print(f"{key}: {str(value)[:200]}...")
         
         # Get the report - handle different possible return formats
         report_content = result.get('report', '')

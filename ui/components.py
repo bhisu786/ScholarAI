@@ -1,4 +1,3 @@
-# ui/components.py
 import streamlit as st
 
 def render_sidebar():
@@ -55,25 +54,3 @@ def render_sidebar():
         </div>
     </div>
     """, unsafe_allow_html=True)
-
-def render_welcome(user_name, prompt_suggestions, on_prompt_select):
-    """Render the welcome section with prompt suggestions"""
-    st.markdown(f"""
-    <div class="welcome-section">
-        <h1 class="welcome-title">Hi there, {user_name}</h1>
-        <h2 class="welcome-subtitle">What would you like to research?</h2>
-        <p class="welcome-description">Use one of the suggested topics below or enter your own to begin research</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Render prompt cards
-    cols = st.columns(4)
-    for idx, suggestion in enumerate(prompt_suggestions[:4]):
-        with cols[idx]:
-            if st.button(suggestion['prompt'], key=f"prompt_btn_{idx}", use_container_width=True, type="secondary"):
-                on_prompt_select(suggestion['prompt'])
-
-def render_chat_interface(messages, is_generating):
-    """Render the chat conversation"""
-    # This function is now handled directly in app.py
-    pass
